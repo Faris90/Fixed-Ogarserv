@@ -1,0 +1,4 @@
+OGar Server - Game Mode: Free For All - Running Time: 200sec
+ID:    1, Nick: [BOT] Indiana  , Score:    696, Cells: 16, Status: 1 IP: BOT
+ID:    2, Nick: [BOT] Taiwan   , Score:    632, Cells: 16, Status: 1 IP: BOT
+ID:    3, Nick: An unnamed cell, Score:     87, Cells:  4, Status: 1 IP: 127.0.0.1
