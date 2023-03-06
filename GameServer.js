@@ -973,53 +973,7 @@ GameServer.prototype.switchSpectator = function(player) {
 };
 
 GameServer.prototype.MasterPing = function() {
-    var timenow = new Date();
-    if ( ( timenow - this.master ) > 30000 )
-    {
-        /* Report our pressence to the Master Server
-         * To list us on the Master server website
-         * located at http://ogar.mivabe.nl/master
-         */
-        this.master = timenow;
-
-        for(var i=0, humans=0, bots=0, players=0, spectate=0, client; i<this.clients.length; i++)
-            client = this.clients[i].playerTracker, -1 == client.disconnect && ("_socket"in this.clients[i] ? client.spectate ? spectate++:humans++:bots++,players++);
-
-        /* Sending Keepalive Ping to MySQL */
-        if ( this.sqlconfig.host != '' && humans == 0 )
-            this.mysql.ping();
-
-        var sName = 'Unnamed Server';
-        if ( this.config.serverName != '' ) sName = this.config.serverName;
-
-				var pversion = 'true';
-				if ( this.config.serverVersion == 0 ) pversion = 'false';
-
-        var data = {
-            current_players: players,
-            alive: humans,
-            spectators: spectate,
-            max_players: this.config.serverMaxConnections,
-            sport: this.config.serverPort,
-            gamemode: this.gameMode.name,
-            agario: pversion,
-            name: sName,
-            opp: myos.platform() + " " + myos.arch(),
-            uptime: process.uptime(),
-            start_time: this.startTime.getTime()
-        };
-
-        var qs = querystring.stringify(data),
-            qslength = qs.length,
-            options = { hostname: "ogar.mivabe.nl", port: 80, path: "/master.php", method: 'POST', headers: {'Content-Type': 'application/json', 'Content-Length': qslength } },
-            buffer = "",
-            req = http.request(options, function(res) {
-                res.on('data', function (chunk) {
-                    buffer+=chunk;
-                });
-            });
-        req.write(qs), req.end();
-    }
+   
 }
 
 // Stats server
